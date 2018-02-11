@@ -23,7 +23,6 @@ entity.starting_bottom.filename = standard
 entity.starting_bottom.hr_version.filename = hr
 entity.starting_side.filename = standard
 entity.starting_side.hr_version.filename = hr
---error(serpent.block(entity))
 entity.animations.filename = standard
 entity.animations.hr_version.filename = hr
 
@@ -49,6 +48,7 @@ local recipe = table.deepcopy(data.raw.recipe["transport-belt"])
 recipe.name = "slow-transport-belt"
 recipe.enabled = true
 recipe.result = "slow-transport-belt"
+recipe.result_count = 10
 
 
 -- add belt
@@ -98,8 +98,12 @@ item.place_result="slow-underground-belt"
 -- recipe underground
 recipe = table.deepcopy(data.raw.recipe["underground-belt"])
 recipe.name = "slow-underground-belt"
-recipe.enabled = true
+recipe.enabled = false
 recipe.result = "slow-underground-belt"
+recipe.ingredients = {
+	{"iron-plate",5},
+	{"slow-transport-belt",5}
+}
 
 
 -- add underground
@@ -151,9 +155,19 @@ item.place_result="slow-splitter"
 -- recipe splitter
 recipe = table.deepcopy(data.raw.recipe["splitter"])
 recipe.name = "slow-splitter"
-recipe.enabled = true
+recipe.enabled = false
 recipe.result = "slow-splitter"
+recipe.ingredients = {
+	{"electronic-circuit",2},
+	{"iron-plate",2},
+	{"slow-transport-belt",1}
+}
 
 
 -- add splitter
 data:extend{entity, item, recipe}
+
+
+-- hide underground and splitter behind logistics research
+table.insert(data.raw.technology.logistics.effects, {type="unlock-recipe", recipe="slow-underground-belt"})
+table.insert(data.raw.technology.logistics.effects, {type="unlock-recipe", recipe="slow-splitter"})
