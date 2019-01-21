@@ -65,21 +65,29 @@ script.on_event("toggle-supply",
             player_data.ison = false
             player.print({"message_off"})
         else
-            -- Reapply slots
-            for i, slot in ipairs(player_data.request_slots) do
-                if slot ~= NULL then
-                    if slot.count == 0 then
-                        player.print({"message_count_zero", "__ENTITY__" .. slot.name .. "__"})
-                        char.clear_request_slot(i)
-                    else
-                        char.set_request_slot(slot, i)
-                    end
-                else
+            -- Clear all slots that have something in it
+            -- needed if someone set one of the saved request - would be in the list twice, which is not possible
+            for i = 1,char.request_slot_count do
+                if char.get_request_slot(i) ~= nil then
+                    print("Clearing slot ", i)
                     char.clear_request_slot(i)
                 end
             end
-            player_data.request_slots = {}
+
+            -- Reapply slots
+            for i, slot in ipairs(player_data.request_slots) do
+                if slot ~= NULL then
+                    print(serpent.block(slot))
+
+                    if slot.count == 0 then
+                        player.print({"message_count_zero", "__ENTITY__" .. slot.name .. "__"})
+                    else
+                        char.set_request_slot(slot, i)
+                    end
+                end
+            end
             player_data.ison = true
+            player_data.request_slots = {}
             player.print({"message_on"})
         end
     end
