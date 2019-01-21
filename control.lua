@@ -69,7 +69,6 @@ script.on_event("toggle-supply",
             -- needed if someone set one of the saved request - would be in the list twice, which is not possible
             for i = 1,char.request_slot_count do
                 if char.get_request_slot(i) ~= nil then
-                    print("Clearing slot ", i)
                     char.clear_request_slot(i)
                 end
             end
@@ -77,8 +76,6 @@ script.on_event("toggle-supply",
             -- Reapply slots
             for i, slot in ipairs(player_data.request_slots) do
                 if slot ~= NULL then
-                    print(serpent.block(slot))
-
                     if slot.count == 0 then
                         player.print({"message_count_zero", "__ENTITY__" .. slot.name .. "__"})
                     else
