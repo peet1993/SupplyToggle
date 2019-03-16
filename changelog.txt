@@ -1,0 +1,48 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2019-03-16
+
+  Changes:
+    - Changed the default hotkey to CTRL + T(oggle) because it was annoying that you couldn't walk south while having CTRL pressed when the mod is installed
+
+  Bugfixes:
+    - Possibly fixed a bug that crashes the game when a research finishes and the mod was not properly initialized
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2019-03-15
+
+  Bugfixes:
+    - Fixed crash when loading an existing savegame that did not use the mod before.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2019-03-15
+
+  Features:
+    - Added automatic disabling on death
+    - Added shortcut bar entry
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2019-03-14 
+
+  Features:
+    - Updated to Factorio 0.17
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+
+  Features:
+    - Made multiplayer compatible
+    - Added save/load persistency, no more being careful to reactivate when leaving
+
+  Bugfixes:
+    - "Fixed" bug with requests that have an amount of zero - the game doesn't allow that, you'll need to add these back manually :(
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+
+  Bugfixes:
+    - Fixed a badly phrased sentence.
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+
+  Features:
+    - Initial release
+

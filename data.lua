@@ -1,7 +1,7 @@
 local hotkey = {
     type = "custom-input",
     name = "toggle-supply",
-    key_sequence = "CONTROL + S",
+    key_sequence = "CONTROL + T",
     consuming = "none",
 }
 data:extend({hotkey})

@@ -77,7 +77,7 @@ function toggle(event)
         return
     end
 
-    local player_data = global.supplytoggle[event.player_index]
+    local player_data = get_player_data(event.player_index)
 
     if player_data.ison then
         if check_empty(char) then
@@ -95,26 +95,34 @@ function modify_button_state()
     for idx, player in pairs(game.players) do
         if player.character then
             player.set_shortcut_available("toggle-supply", player.character.request_slot_count ~= 0)
-            toggle_shortcut(player, global.supplytoggle[idx].ison)
+            toggle_shortcut(player, get_player_data(idx).ison)
         end
     end
 end
 
-function init_player_with_index(index)
-    -- Set up reference to players table in global
-    if global.supplytoggle[index] == nil then
-        global.supplytoggle[index] = {
-            ison = true,
-            request_slots = {}
-        }
+function get_player_data(index)
+    if global.supplytoggle == nil then
+        init_supplytoggle()
+    elseif global.supplytoggle[index] == nil then
+        init_player(index)
     end
+
+    return global.supplytoggle[index]
+end
+
+function init_player(index)
+    -- Set up reference to players table in global
+    global.supplytoggle[index] = {
+        ison = true,
+        request_slots = {}
+    }
 end
 
 function init_supplytoggle()
     global.supplytoggle = {}
 
     for idx, _ in pairs(game.players) do
-        init_player_with_index(idx)
+        init_player(idx)
     end
 
     modify_button_state()
@@ -147,7 +155,7 @@ script.on_event({defines.events.on_player_respawned},
             return
         end
 
-        local player_data = global.supplytoggle[event.player_index]
+        local player_data = get_player_data(event.player_index)
         if player_data.ison then
             toggle_off(player_data, player, char)
             player.print({"message_died"})
@@ -179,7 +187,7 @@ script.on_event({defines.events.on_console_command}, modify_button_state)
 -- Initialize entry for new player and set the shortcut button correctly
 script.on_event({defines.events.on_player_created},
     function(event)
-        init_player_with_index(event.player_index)
+        init_player(event.player_index)
         modify_button_state()
     end
 )
