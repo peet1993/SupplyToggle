@@ -1,11 +1,11 @@
 {
 	"name": "SupplyToggle",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"title": "Logistic Supply Toggle",
 	"author": "peet1993",
 	"contact": "",
 	"homepage": "",
-	"factorio_version": "0.17",
-	"dependencies": ["base >= 0.17"],
+	"factorio_version": "0.18",
+	"dependencies": ["base >= 0.18"],
 	"description": "Toggle logistic requests to stop bots from being annoying when dumping your inventory to carry stuff."
 }	
