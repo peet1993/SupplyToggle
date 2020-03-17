@@ -61,6 +61,9 @@ function toggle_on(player_data, player, char)
 end
 
 function toggle(event)
+    game.players[event.player_index].print({"message_deprecated"})
+    game.players[event.player_index].print({"message_deprecated_l2"})
+
     -- get char of player that fired the event
     local player = game.players[event.player_index]
     if not player then
@@ -121,7 +124,8 @@ end
 function init_supplytoggle()
     global.supplytoggle = {}
 
-    for idx, _ in pairs(game.players) do
+    for idx, player in pairs(game.players) do
+        player.print({"message_deprecated_new"})
         init_player(idx)
     end
 
@@ -144,6 +148,9 @@ end
 -- Disable request when player respawns
 script.on_event({defines.events.on_player_respawned},
     function(event)
+        game.players[event.player_index].print({"message_deprecated"})
+        game.players[event.player_index].print({"message_deprecated_l2"})
+
         -- get char of player that fired the event
         local player = game.players[event.player_index]
         if not player then
@@ -187,6 +194,8 @@ script.on_event({defines.events.on_console_command}, modify_button_state)
 -- Initialize entry for new player and set the shortcut button correctly
 script.on_event({defines.events.on_player_created},
     function(event)
+        game.players[event.player_index].print({"message_deprecated"})
+        game.players[event.player_index].print({"message_deprecated_l2"})
         init_player(event.player_index)
         modify_button_state()
     end
